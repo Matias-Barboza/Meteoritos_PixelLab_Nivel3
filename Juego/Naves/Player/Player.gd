@@ -12,6 +12,7 @@ var dir_rotacion : int = 0
 
 #Atributos onready
 onready var canion : Canion = $Canion
+onready var rayo_laser : RayoLaser = $LaserBeam2D
 
 # Métodos
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
@@ -48,3 +49,14 @@ func player_input() -> void:
 	
 	if Input.is_action_just_released("disparo_principal"):
 		canion.set_esta_disparando(false)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	
+	#Disparo rayo laser
+	if event.is_action_pressed("disparo_laser"):
+		rayo_laser.set_is_casting(true)
+	
+	if event.is_action_released("disparo_laser"):
+		rayo_laser.set_is_casting(false) 
+	
