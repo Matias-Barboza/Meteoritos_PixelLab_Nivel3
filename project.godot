@@ -25,9 +25,9 @@ _global_script_classes=[ {
 "path": "res://Juego/Naves/Player/Player.gd"
 }, {
 "base": "Area2D",
-"class": "ProyectilPlayer",
+"class": "Proyectil",
 "language": "GDScript",
-"path": "res://Juego/Proyectiles/ProyectilPlayer.gd"
+"path": "res://Juego/Proyectiles/Proyectil.gd"
 }, {
 "base": "RayCast2D",
 "class": "RayoLaser",
@@ -38,18 +38,29 @@ _global_script_class_icons={
 "Canion": "",
 "Nivel": "",
 "Player": "",
-"ProyectilPlayer": "",
+"Proyectil": "",
 "RayoLaser": ""
 }
 
 [application]
 
-config/name="Meteoritos_juego"
-config/icon="res://icon.png"
+config/name="Meteoritos"
+config/icon="res://icono_meteoritos.png"
 
 [autoload]
 
 Eventos="*res://Juego/Autoloads/Eventos.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/resizable=false
+window/size/always_on_top=true
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [gui]
 
@@ -91,6 +102,14 @@ disparo_laser={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemigo"
+2d_physics/layer_3="meteorito"
+2d_physics/layer_4="proyectil_player"
+2d_physics/layer_5="proyectil_enemigo"
 
 [physics]
 

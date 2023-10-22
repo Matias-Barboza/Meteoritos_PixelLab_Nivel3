@@ -21,5 +21,5 @@ func crear_contenedores() -> void:
 	add_child(contenedor_proyectiles)
 
 
-func _on_disparo(proyectil : ProyectilPlayer):
+func _on_disparo(proyectil : Proyectil):
 	contenedor_proyectiles.add_child(proyectil)
