@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sonido_disparo_principal.ogg-db7fd76288995dc508f8ad4cbe14d97a.oggstr"
+
+[deps]
+
+source_file="res://Juego/Proyectiles/sonido_disparo_principal.ogg"
+dest_files=[ "res://.import/sonido_disparo_principal.ogg-db7fd76288995dc508f8ad4cbe14d97a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

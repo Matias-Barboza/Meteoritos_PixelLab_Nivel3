@@ -10,11 +10,11 @@ export var potencia_rotacion : int = 270
 var empuje : Vector2 = Vector2.ZERO
 var dir_rotacion : int = 0
 
+#Atributos onready
+onready var canion : Canion = $Canion
+
 # Métodos
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
-	
-	print(rad2deg(rotation))
-	print(empuje.rotated(rotation))
 	
 	apply_central_impulse(empuje.rotated(rotation))
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
@@ -41,3 +41,10 @@ func player_input() -> void:
 		dir_rotacion += 1
 	elif Input.is_action_pressed("rotar_antihorario"):
 		dir_rotacion -= 1
+	
+	#Disparo
+	if Input.is_action_pressed("disparo_principal"):
+		canion.set_esta_disparando(true)
+	
+	if Input.is_action_just_released("disparo_principal"):
+		canion.set_esta_disparando(false)
