@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Juego/Naves/Player/player_ship.png" type="Texture" id=1]
 [ext_resource path="res://Juego/Naves/Player/MaterialFisico.tres" type="PhysicsMaterial" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Juego/Proyectiles/Láser/LaserBeam2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Juego/Naves/Player/Trail/Trail2D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Juego/Naves/Player/Motor/SFXMotor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Juego/Naves/Player/impacto_player.ogg" type="AudioStream" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 36.0555
@@ -85,6 +86,7 @@ position = Vector2( 0, 33 )
 
 [node name="LaserBeam2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 40, 0 )
+collide_with_areas = true
 
 [node name="PuntoInicioEstela" type="Position2D" parent="."]
 position = Vector2( -9, 0 )
@@ -103,6 +105,10 @@ target_path = NodePath("..")
 autoplay = "spawn"
 anims/default = SubResource( 2 )
 anims/spawn = SubResource( 3 )
+
+[node name="SFXImpactoDanio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

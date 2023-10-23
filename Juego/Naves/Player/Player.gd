@@ -14,6 +14,8 @@ enum ESTADO {
 export var potencia_motor : int = 30
 export var potencia_rotacion : int = 270
 export var estela_maxima : int = 150
+export var hitpoints : float = 10
+
 
 #Atributos
 var empuje : Vector2 = Vector2.ZERO
@@ -27,6 +29,8 @@ onready var rayo_laser : RayoLaser = $LaserBeam2D
 onready var estela : Estela = $PuntoInicioEstela/Trail2D 
 onready var sfx_motor : AudioStreamPlayer2D = $SFXMotor
 onready var colisionador : CollisionShape2D = $CollisionShape2D
+onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
+
 
 # Métodos
 func _ready() -> void:
@@ -127,6 +131,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func destruir() -> void:
 	
 	controlador_estados(ESTADO.MUERTO)
+
+
+func recibir_danio(danio : float):
+	
+	hitpoints -= danio
+	sfx_hurt.play()
+	
+	if hitpoints < 0.0:
+		destruir()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
