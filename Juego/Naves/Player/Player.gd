@@ -30,6 +30,7 @@ onready var estela : Estela = $PuntoInicioEstela/Trail2D
 onready var sfx_motor : AudioStreamPlayer2D = $SFXMotor
 onready var colisionador : CollisionShape2D = $CollisionShape2D
 onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
+onready var escudo : Escudo = $Escudo
 
 
 # Métodos
@@ -126,6 +127,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_released("mover_adelante") or event.is_action_released("mover_atras"):
 		sfx_motor.sonido_off()
+	
+	#Activar escudo
+	if event.is_action_pressed("activar_escudo") and not escudo.get_esta_activado():
+		escudo.activar()
 
 
 func destruir() -> void:
