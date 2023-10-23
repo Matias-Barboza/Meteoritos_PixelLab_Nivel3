@@ -14,6 +14,7 @@ onready var esta_enfriado : bool = true
 onready var esta_disparando : bool = false setget set_esta_disparando
 
 var puntos_disparo : Array = []
+var puede_disparar : bool = false setget set_puede_disparar
 
 func _ready() -> void:
 	almacenar_puntos_disparo()
@@ -50,6 +51,10 @@ func disparar() -> void:
 
 func set_esta_disparando(disparando : bool) -> void:
 	esta_disparando = disparando
+
+
+func set_puede_disparar(estado_disparar : bool) -> void:
+	puede_disparar = estado_disparar
 
 
 func _on_TimerEnfriamiento_timeout() -> void:
