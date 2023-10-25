@@ -35,7 +35,7 @@ func _on_disparo(proyectil : Proyectil):
 
 func _on_nave_destruida(posicion : Vector2 , cantidad_explosiones) -> void:
 	
-	for i in range(cantidad_explosiones):
+	for _i in range(cantidad_explosiones):
 		var new_explosion = explosion.instance()
 		new_explosion.global_position = posicion
 		add_child(new_explosion)
