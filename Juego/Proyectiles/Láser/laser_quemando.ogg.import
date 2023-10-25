@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/laser_quemando.ogg-4ca958b3a17e635105954825818c324d.oggstr"
+
+[deps]
+
+source_file="res://Juego/Proyectiles/Láser/laser_quemando.ogg"
+dest_files=[ "res://.import/laser_quemando.ogg-4ca958b3a17e635105954825818c324d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
