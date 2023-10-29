@@ -1,3 +1,4 @@
+class_name EnemigoDummy
 extends Node2D
 
 
