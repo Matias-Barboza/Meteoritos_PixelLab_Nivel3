@@ -13,6 +13,7 @@ var hitpoints : float
 var esta_en_sector : bool = true setget set_esta_en_sector
 var posicion_original_spawn : Vector2 = Vector2.ZERO
 var velocidad_original_spawn : Vector2 = Vector2.ZERO
+var esta_destruido : bool = false
 
 
 onready var animaciones : AnimationPlayer = $AnimationPlayer
@@ -68,7 +69,8 @@ func recibir_danio(danio : float) -> void:
 	
 	hitpoints -= danio
 	
-	if hitpoints < 0.0:
+	if hitpoints < 0.0 and not esta_destruido:
+		esta_destruido = false
 		destruir()
 	
 	sfx_impacto.play()
