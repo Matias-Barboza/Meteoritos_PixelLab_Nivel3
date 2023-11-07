@@ -25,16 +25,17 @@ var estado_actual  : int = ESTADO.SPAWNEANDO
 
 #Atributos onready
 onready var canion : Canion = $Canion
-onready var rayo_laser : RayoLaser = $LaserBeam2D
+onready var rayo_laser : RayoLaser = $LaserBeam2D setget, get_laser
 onready var estela : Estela = $PuntoInicioEstela/Trail2D 
 onready var sfx_motor : AudioStreamPlayer2D = $SFXMotor
 onready var colisionador : CollisionShape2D = $CollisionShape2D
 onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
-onready var escudo : Escudo = $Escudo
+onready var escudo : Escudo = $Escudo setget, get_escudo
 
 
 # Métodos
 func _ready() -> void:
+	
 	controlador_estados(estado_actual)
 
 
@@ -66,7 +67,7 @@ func controlador_estados(nuevo_estado : int) -> void:
 		ESTADO.MUERTO:
 			colisionador.set_deferred("disabled", true)
 			canion.set_puede_disparar(false)
-			Eventos.emit_signal("nave_destruida", global_position, 3)
+			Eventos.emit_signal("nave_destruida", self, global_position, 3)
 			queue_free()
 		_:
 			printerr("Error de estado")
@@ -148,6 +149,7 @@ func recibir_danio(danio : float):
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	
 	if anim_name == "spawn":
 		controlador_estados(ESTADO.VIVO)
 
@@ -157,3 +159,13 @@ func _on_Player_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()
 		destruir()
+
+
+func get_laser() -> RayoLaser:
+	
+	return rayo_laser
+
+
+func get_escudo() -> Escudo:
+	
+	return escudo

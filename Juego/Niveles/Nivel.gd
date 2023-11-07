@@ -110,7 +110,24 @@ func restar_cantidad_meteoritos() -> void:
 			)
 
 
-func _on_nave_destruida(posicion : Vector2 , cantidad_explosiones) -> void:
+func crear_posicion_aleatoria(rango_horizontal : float, rango_vertical : float) -> Vector2:
+	
+	randomize()
+	var rand_x = rand_range(-rango_horizontal, rango_horizontal)
+	var rand_y = rand_range(-rango_vertical, rango_vertical)
+	
+	return Vector2(rand_x, rand_y)
+
+
+func _on_nave_destruida(nave : Player,posicion : Vector2 , cantidad_explosiones) -> void:
+	
+	if nave is Player:
+		transicion_camaras(
+			posicion,
+			posicion + crear_posicion_aleatoria(-200, 200),
+			camara_nivel,
+			tiempo_transicion_camara
+		)
 	
 	for _i in range(cantidad_explosiones):
 		var new_explosion = explosion.instance()
