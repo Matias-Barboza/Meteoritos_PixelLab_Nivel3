@@ -25,12 +25,12 @@ var estado_actual  : int = ESTADO.SPAWNEANDO
 
 #Atributos onready
 onready var canion : Canion = $Canion
-onready var rayo_laser : RayoLaser = $LaserBeam2D
+onready var rayo_laser : RayoLaser = $LaserBeam2D setget, get_laser
 onready var estela : Estela = $PuntoInicioEstela/Trail2D 
 onready var sfx_motor : AudioStreamPlayer2D = $SFXMotor
 onready var colisionador : CollisionShape2D = $CollisionShape2D
 onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
-onready var escudo : Escudo = $Escudo
+onready var escudo : Escudo = $Escudo setget, get_escudo
 
 
 # Métodos
@@ -157,3 +157,13 @@ func _on_Player_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()
 		destruir()
+
+
+func get_laser() -> RayoLaser:
+	
+	return rayo_laser
+
+
+func get_escudo() -> Escudo:
+	
+	return escudo
