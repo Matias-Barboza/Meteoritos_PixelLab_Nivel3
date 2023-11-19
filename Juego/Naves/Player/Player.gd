@@ -1,78 +1,52 @@
 class_name Player
-extends RigidBody2D
+extends NaveBase
 
-
-enum ESTADO {
-	SPAWNEANDO,
-	VIVO,
-	INVULNERABLE,
-	MUERTO
-}
-
-
-#Atributos como export
+# Atributos como export
 export var potencia_motor : int = 30
-export var potencia_rotacion : int = 270
+export var potencia_rotacion : int = 260
 export var estela_maxima : int = 150
-export var hitpoints : float = 10
 
 
-#Atributos
+# Atributos
 var empuje : Vector2 = Vector2.ZERO
 var dir_rotacion : int = 0
-var estado_actual  : int = ESTADO.SPAWNEANDO
 
 
-#Atributos onready
-onready var canion : Canion = $Canion
+# Atributos onready
 onready var rayo_laser : RayoLaser = $LaserBeam2D setget, get_laser
 onready var estela : Estela = $PuntoInicioEstela/Trail2D 
 onready var sfx_motor : AudioStreamPlayer2D = $SFXMotor
-onready var colisionador : CollisionShape2D = $CollisionShape2D
-onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
 onready var escudo : Escudo = $Escudo setget, get_escudo
 
 
-# Métodos
-func _ready() -> void:
-	
-	controlador_estados(estado_actual)
-
-
-func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
-	
-	apply_central_impulse(empuje.rotated(rotation))
-	apply_torque_impulse(dir_rotacion * potencia_rotacion)
-
-
-func _process(_delta: float) -> void:
+# Metodos
+func _unhandled_input(event: InputEvent) -> void:
 	
 	if not esta_input_activo():
 		return
 	
-	player_input()
-
-
-func controlador_estados(nuevo_estado : int) -> void:
+	#Disparo rayo laser
+	if event.is_action_pressed("disparo_laser"):
+		rayo_laser.set_is_casting(true)
 	
-	match nuevo_estado:
-		ESTADO.SPAWNEANDO:
-			colisionador.set_deferred("disabled", true)
-			canion.set_puede_disparar(false)
-		ESTADO.VIVO:
-			colisionador.set_deferred("disabled", false)
-			canion.set_puede_disparar(true)
-		ESTADO.INVULNERABLE:
-			colisionador.set_deferred("disabled", true)
-		ESTADO.MUERTO:
-			colisionador.set_deferred("disabled", true)
-			canion.set_puede_disparar(false)
-			Eventos.emit_signal("nave_destruida", self, global_position, 3)
-			queue_free()
-		_:
-			printerr("Error de estado")
+	if event.is_action_released("disparo_laser"):
+		rayo_laser.set_is_casting(false) 
 	
-	estado_actual = nuevo_estado
+	#Activado estela
+	if event.is_action_pressed("mover_adelante"):
+		estela.set_max_points(estela_maxima)
+		sfx_motor.sonido_on()
+	elif event.is_action_pressed("mover_atras"):
+		estela.set_max_points(0)
+		sfx_motor.sonido_on()
+	
+	if event.is_action_released("mover_adelante") or event.is_action_released("mover_atras"):
+		sfx_motor.sonido_off()
+	
+	#Activar escudo
+	if event.is_action_pressed("activar_escudo") and not escudo.get_esta_activado():
+		escudo.activar()
+
 
 func player_input() -> void:
 	
@@ -106,61 +80,22 @@ func esta_input_activo() -> bool:
 	
 	return true
 
-func _unhandled_input(event: InputEvent) -> void:
+
+func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
+	
+	apply_central_impulse(empuje.rotated(rotation))
+	apply_torque_impulse(dir_rotacion * potencia_rotacion)
+
+
+func _process(_delta: float) -> void:
 	
 	if not esta_input_activo():
 		return
 	
-	#Disparo rayo laser
-	if event.is_action_pressed("disparo_laser"):
-		rayo_laser.set_is_casting(true)
-	
-	if event.is_action_released("disparo_laser"):
-		rayo_laser.set_is_casting(false) 
-	
-	#Activado estela
-	if event.is_action_pressed("mover_adelante"):
-		estela.set_max_points(estela_maxima)
-		sfx_motor.sonido_on()
-	elif event.is_action_pressed("mover_atras"):
-		estela.set_max_points(0)
-		sfx_motor.sonido_on()
-	
-	if event.is_action_released("mover_adelante") or event.is_action_released("mover_atras"):
-		sfx_motor.sonido_off()
-	
-	#Activar escudo
-	if event.is_action_pressed("activar_escudo") and not escudo.get_esta_activado():
-		escudo.activar()
+	player_input()
 
 
-func destruir() -> void:
-	
-	controlador_estados(ESTADO.MUERTO)
-
-
-func recibir_danio(danio : float):
-	
-	hitpoints -= danio
-	sfx_hurt.play()
-	
-	if hitpoints < 0.0:
-		destruir()
-
-
-func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-	
-	if anim_name == "spawn":
-		controlador_estados(ESTADO.VIVO)
-
-
-func _on_Player_body_entered(body: Node) -> void:
-	
-	if body is Meteorito:
-		body.destruir()
-		destruir()
-
-
+# Getters y Setters
 func get_laser() -> RayoLaser:
 	
 	return rayo_laser
@@ -169,3 +104,9 @@ func get_laser() -> RayoLaser:
 func get_escudo() -> Escudo:
 	
 	return escudo
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	
+	if anim_name == "spawn":
+		controlador_estados(ESTADO.VIVO)

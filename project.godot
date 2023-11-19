@@ -24,10 +24,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/Proyectiles/Canion.gd"
 }, {
+"base": "NaveBase",
+"class": "EnemigoBase",
+"language": "GDScript",
+"path": "res://Juego/Naves/Enemigos/EnemigoBase.gd"
+}, {
 "base": "Node2D",
 "class": "EnemigoDummy",
 "language": "GDScript",
 "path": "res://Juego/Naves/Enemigos/EnemigoDummy.gd"
+}, {
+"base": "EnemigoBase",
+"class": "EnemigoInterceptor",
+"language": "GDScript",
+"path": "res://Juego/Naves/Enemigos/EnemigoInterceptor.gd"
 }, {
 "base": "Area2D",
 "class": "Escudo",
@@ -64,12 +74,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Juego/Naves/Player/Motor/SFXMotor.gd"
 }, {
+"base": "RigidBody2D",
+"class": "NaveBase",
+"language": "GDScript",
+"path": "res://Juego/Naves/NaveBase.gd"
+}, {
 "base": "Node2D",
 "class": "Nivel",
 "language": "GDScript",
 "path": "res://Juego/Niveles/Nivel.gd"
 }, {
-"base": "RigidBody2D",
+"base": "NaveBase",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Juego/Naves/Player/Player.gd"
@@ -98,7 +113,9 @@ _global_script_class_icons={
 "CamaraJuego": "",
 "CameraPlayer": "",
 "Canion": "",
+"EnemigoBase": "",
 "EnemigoDummy": "",
+"EnemigoInterceptor": "",
 "Escudo": "",
 "EstacionRecarga": "",
 "Estela": "",
@@ -106,6 +123,7 @@ _global_script_class_icons={
 "Meteorito": "",
 "MeteoritoSpawner": "",
 "Motor": "",
+"NaveBase": "",
 "Nivel": "",
 "Player": "",
 "Proyectil": "",
@@ -189,7 +207,6 @@ zoom_out={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-
 recarga_escudo={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
