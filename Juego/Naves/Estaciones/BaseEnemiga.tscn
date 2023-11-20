@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Juego/Naves/Estaciones/AreaAtraccion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Naves/Estaciones/spriteBaseEnemiga3.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Juego/Naves/Estaciones/spriteBaseEnemiga4.png" type="Texture" id=5]
 [ext_resource path="res://Juego/Naves/Enemigos/Area2D.gd" type="Script" id=6]
 [ext_resource path="res://Juego/Naves/Estaciones/BaseEnemiga.gd" type="Script" id=7]
+[ext_resource path="res://Juego/Naves/Estaciones/PuntosSpawn.gd" type="Script" id=8]
+[ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 58.0
@@ -137,6 +139,7 @@ position = Vector2( -5, 67 )
 z_index = 35
 z_as_relative = false
 script = ExtResource( 7 )
+orbital = ExtResource( 9 )
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2( 1, -46 )
@@ -196,6 +199,22 @@ anims/rotacion_horario = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[node name="PuntosSpawn" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Norte" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 5, -453 )
+
+[node name="Sur" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 5, 299 )
+
+[node name="Este" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 340, -67 )
+
+[node name="Oeste" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( -310, -67 )
+
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 
 [editable path="AreaAtraccion"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Juego/Naves/NaveBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.gd" type="Script" id=2]
+[ext_resource path="res://Juego/Naves/Enemigos/enemigo_orbital.png" type="Texture" id=3]
+[ext_resource path="res://Juego/Proyectiles/ProyectilEnemigo.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 23.0001
+height = 44.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.5, 0.5 ), Vector2( 0.4, 0.4 ), Vector2( 0.5, 0.5 ) ]
+}
+
+[node name="EnemigoOrbital" instance=ExtResource( 1 )]
+z_index = 35
+z_as_relative = false
+collision_layer = 2
+collision_mask = 13
+mode = 3
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 2 )
+cantidad_explosiones = 1
+rango_max_ataque = 1400.0
+
+[node name="Sprite" parent="." index="0"]
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 0 )
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="Canion" parent="." index="2"]
+proyectil = ExtResource( 4 )
+cadencia_disparo = 1.2
+
+[node name="PuntoIzquierdo" parent="Canion" index="0"]
+position = Vector2( 17, -18 )
+
+[node name="PuntoDerecho" parent="Canion" index="1"]
+position = Vector2( 17, 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "spawn"
+anims/spawn = SubResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="Canion"]

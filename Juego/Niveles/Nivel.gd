@@ -43,6 +43,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("destruccion_meteorito", self, "_on_destruccion_meteorito")
 	Eventos.connect("nave_en_sector_peligro", self , "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
+	Eventos.connect("spawn_orbital", self, "_on_spawn_orbital")
 
 
 func crear_contenedores() -> void:
@@ -147,7 +148,7 @@ func _on_disparo(proyectil : Proyectil) -> void:
 	contenedor_proyectiles.add_child(proyectil)
 
 
-func _on_base_destruida(posiciones : Array) -> void:
+func _on_base_destruida(_base: Node2D, posiciones : Array) -> void:
 	
 	for posicion in posiciones:
 		
@@ -166,6 +167,11 @@ func _on_nave_destruida(nave : Player,posicion : Vector2 , cantidad_explosiones 
 		)
 	
 	crear_explosion(posicion, cantidad_explosiones, 0.6, Vector2(100.0, 50.0))
+
+
+func _on_spawn_orbital(enemigo : EnemigoOrbital) -> void:
+	
+	contenedor_enemigos.add_child(enemigo)
 
 
 func _on_spawn_meteoritos(pos_spawn : Vector2, dir_meteorito : Vector2, tamanio : float) -> void:
