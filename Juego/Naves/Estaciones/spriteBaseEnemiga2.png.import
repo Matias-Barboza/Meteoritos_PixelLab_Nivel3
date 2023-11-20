@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/estacion_espacial.png-8e28c3b6e39101de89d09719172149d8.stex"
+path="res://.import/spriteBaseEnemiga2.png-7580909e323ac6c9ed99328b4747f052.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Juego/Naves/Estacion/estacion_espacial.png"
-dest_files=[ "res://.import/estacion_espacial.png-8e28c3b6e39101de89d09719172149d8.stex" ]
+source_file="res://Juego/Naves/Estaciones/spriteBaseEnemiga2.png"
+dest_files=[ "res://.import/spriteBaseEnemiga2.png-7580909e323ac6c9ed99328b4747f052.stex" ]
 
 [params]
 

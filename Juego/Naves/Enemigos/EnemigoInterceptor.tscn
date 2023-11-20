@@ -49,6 +49,8 @@ radius = 612.138
 radius = 494.146
 
 [node name="EnemigoInterceptor" instance=ExtResource( 3 )]
+z_index = 40
+z_as_relative = false
 collision_layer = 2
 collision_mask = 15
 physics_material_override = SubResource( 4 )

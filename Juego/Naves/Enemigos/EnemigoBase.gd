@@ -15,7 +15,7 @@ func _ready() -> void:
 	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 
 # Metodos
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	rotar_hacia_player()
 

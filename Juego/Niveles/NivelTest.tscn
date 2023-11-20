@@ -10,7 +10,7 @@
 [ext_resource path="res://Juego/Niveles/Fondos/fondo_purpura.png" type="Texture" id=8]
 [ext_resource path="res://Juego/Meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=10]
-[ext_resource path="res://Juego/Naves/Estacion/EstacionRecarga.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Juego/Naves/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Juego/Naves/Enemigos/EnemigoInterceptor.tscn" type="PackedScene" id=12]
 
 [node name="NivelTest" type="Node2D"]
@@ -41,6 +41,8 @@ numero_peligros = 2
 
 [node name="EstacionRecarga" parent="ContenedorEstaciones" instance=ExtResource( 11 )]
 position = Vector2( 1797, 264 )
+
+[node name="ContenedorBaseEnemiga" type="Node2D" parent="."]
 
 [node name="CamaraNivel" type="Camera2D" parent="."]
 position = Vector2( 960, 540 )
