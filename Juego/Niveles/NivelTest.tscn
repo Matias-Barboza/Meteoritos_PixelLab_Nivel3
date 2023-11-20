@@ -17,6 +17,7 @@
 script = ExtResource( 2 )
 explosion = ExtResource( 5 )
 meteorito = ExtResource( 4 )
+enemigo_interceptor = ExtResource( 12 )
 explosion_meteorito = ExtResource( 7 )
 sector_meteoritos = ExtResource( 9 )
 
@@ -29,10 +30,17 @@ environment = ExtResource( 3 )
 position = Vector2( 3014, 361 )
 tipo_peligro = "Meteorito"
 
+[node name="TriggersInterceptores" type="Node2D" parent="."]
+
+[node name="SectorPeligro" parent="TriggersInterceptores" instance=ExtResource( 6 )]
+position = Vector2( 812, 1442 )
+tipo_peligro = "Enemigo"
+numero_peligros = 2
+
 [node name="ContenedorEstaciones" type="Node2D" parent="."]
 
 [node name="EstacionRecarga" parent="ContenedorEstaciones" instance=ExtResource( 11 )]
-position = Vector2( 1615, 745 )
+position = Vector2( 1797, 264 )
 
 [node name="CamaraNivel" type="Camera2D" parent="."]
 position = Vector2( 960, 540 )
@@ -123,11 +131,9 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 670, 572 )
-
-[node name="EnemigoInterceptor" parent="." instance=ExtResource( 12 )]
-position = Vector2( 710, 892 )
+position = Vector2( 89, 102 )
+linear_damp = 1.5
+potencia_motor = 20
+potencia_rotacion = 270
 
 [connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]
-[connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
-[connection signal="body_entered" from="EnemigoInterceptor" to="EnemigoInterceptor" method="_on_Player_body_entered"]

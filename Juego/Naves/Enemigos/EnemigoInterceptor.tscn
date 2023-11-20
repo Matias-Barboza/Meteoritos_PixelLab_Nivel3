@@ -43,19 +43,20 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 493.004
+radius = 612.138
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 494.502
+radius = 494.146
 
 [node name="EnemigoInterceptor" instance=ExtResource( 3 )]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 physics_material_override = SubResource( 4 )
 contacts_reported = 2
 contact_monitor = true
 script = ExtResource( 4 )
 cantidad_explosiones = 1
+potencia_maxima = 800.0
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
@@ -69,7 +70,7 @@ shape = SubResource( 5 )
 [node name="Canion" parent="." index="2"]
 proyectil = ExtResource( 5 )
 cadencia_disparo = 1.2
-velocidad_proyectil = 1200
+velocidad_proyectil = 1000
 
 [node name="PuntoIzquierdo" parent="Canion" index="0"]
 position = Vector2( 42, -31 )
@@ -93,11 +94,16 @@ collision_layer = 0
 shape = SubResource( 1 )
 
 [node name="AreaDeteccion" type="Area2D" parent="." index="7"]
+modulate = Color( 0, 0, 0, 1 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0"]
 shape = SubResource( 2 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
+[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
+[connection signal="body_entered" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_entered"]
+[connection signal="body_exited" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_exited"]
 
 [editable path="Canion"]
