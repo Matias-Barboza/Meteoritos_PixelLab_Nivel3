@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Juego/Naves/Estaciones/AreaAtraccion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Naves/Estaciones/spriteBaseEnemiga3.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Juego/Naves/Estaciones/BaseEnemiga.gd" type="Script" id=7]
 [ext_resource path="res://Juego/Naves/Estaciones/PuntosSpawn.gd" type="Script" id=8]
 [ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Juego/Naves/Estaciones/RutaEnemigo.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 58.0
@@ -54,84 +55,91 @@ resource_name = "pendulo"
 length = 8.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites:rotation_degrees")
+tracks/0/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0.435294, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 2, 4, 6, 8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 45.0, 0.0, -45.0, 0.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0.435294, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 resource_name = "rotacion_antihorario"
 length = 5.0
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites:rotation_degrees")
+tracks/0/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0.435294, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -360.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0.435294, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "rotacion_horario"
 length = 5.0
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprites:rotation_degrees")
+tracks/0/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 360.0 ]
+"values": [ Color( 0, 0.435294, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AreaAtraccion/SpriteZona:self_modulate")
+tracks/1/path = NodePath(".:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0.435294, 1, 0 ) ]
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( -8.48528, 140.007, 8.48528, -140.007, -461, -63, 2.82843, 63.6396, -2.82843, -63.6396, -354, -232, -15.5491, 44.1698, 15.5491, -44.1698, -337, -363, -96.9695, 30.5702, 96.9695, -30.5702, -143, -393, -46.0732, -0.252281, 46.0732, 0.252281, 1, -507, -99.7138, -21.4121, 99.7138, 21.4121, 179, -401, -14.1421, -18.3848, 14.1421, 18.3848, 353, -347, 5.65685, -70.7107, -5.65685, 70.7107, 355, -231, -1.41421, -56.5685, 1.41421, 56.5685, 447, -79, 29.6985, -46.6691, -29.6985, 46.6691, 376, 66, 21.2132, -29.6985, -21.2132, 29.6985, 363, 252, 48.0833, -15.5564, -48.0833, 15.5564, 216, 276, 49.4975, 0, -49.4975, 0, 13, 391, 45.2548, 7.07107, -45.2548, -7.07107, -165, 281, 48.0833, 55.1543, -48.0833, -55.1543, -335, 251, 39.598, 26.8701, -39.598, -26.8701, -360, 63, 0, 0, 0, 0, -461, -63 )
 }
 
 [node name="BaseEnemiga" type="Node2D"]
@@ -140,6 +148,7 @@ z_index = 35
 z_as_relative = false
 script = ExtResource( 7 )
 orbital = ExtResource( 9 )
+numero_orbitales = 8
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2( 1, -46 )
@@ -163,26 +172,27 @@ position = Vector2( 4, -218 )
 texture = ExtResource( 5 )
 
 [node name="AreaColision" type="Area2D" parent="."]
+rotation = -0.271772
 collision_layer = 32
 collision_mask = 13
 script = ExtResource( 6 )
 
 [node name="CollisionShapeCuerpo" type="CollisionShape2D" parent="AreaColision"]
-position = Vector2( 5, -95 )
+position = Vector2( 29.7813, -88.2444 )
+rotation = 0.261799
 shape = SubResource( 4 )
 
 [node name="CollisionShapeBrazoI" type="CollisionShape2D" parent="AreaColision"]
-position = Vector2( -101, -144 )
-rotation = 1.5708
+position = Vector2( -59.6011, -166.096 )
+rotation = 1.83259
 shape = SubResource( 5 )
 
 [node name="CollisionShapeBrazoI2" type="CollisionShape2D" parent="AreaColision"]
-position = Vector2( 148, -144 )
-rotation = 1.5708
+position = Vector2( 182.455, -99.6806 )
+rotation = 1.83259
 shape = SubResource( 6 )
 
 [node name="AreaAtraccion" parent="." instance=ExtResource( 1 )]
-visible = false
 position = Vector2( 0, -47 )
 
 [node name="SpriteZona" parent="AreaAtraccion" index="1"]
@@ -214,7 +224,14 @@ position = Vector2( 340, -67 )
 [node name="Oeste" type="Position2D" parent="PuntosSpawn"]
 position = Vector2( -310, -67 )
 
+[node name="RutaEnemigo" type="Path2D" parent="."]
+curve = SubResource( 8 )
+script = ExtResource( 10 )
+
+[node name="TimerSpawnerEnemigos" type="Timer" parent="."]
+
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="timeout" from="TimerSpawnerEnemigos" to="." method="_on_TimerSpawnerEnemigos_timeout"]
 
 [editable path="AreaAtraccion"]
