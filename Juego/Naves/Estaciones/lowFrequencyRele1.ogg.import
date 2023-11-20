@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/lowFrequencyRele1.ogg-10db4dfc9259ab0dd3ccd24e2a5e40a2.oggstr"
+
+[deps]
+
+source_file="res://Juego/Naves/Estaciones/lowFrequencyRele1.ogg"
+dest_files=[ "res://.import/lowFrequencyRele1.ogg-10db4dfc9259ab0dd3ccd24e2a5e40a2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

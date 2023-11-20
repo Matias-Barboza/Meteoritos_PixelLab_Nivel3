@@ -206,6 +206,7 @@ anims/rotacion_antihorario = SubResource( 2 )
 anims/rotacion_horario = SubResource( 3 )
 
 [node name="ImpactoSFX" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

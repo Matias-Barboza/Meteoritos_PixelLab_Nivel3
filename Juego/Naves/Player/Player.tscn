@@ -37,6 +37,9 @@ texture = ExtResource( 8 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
+[node name="Canion" parent="." index="2"]
+danio_proyectil = 2
+
 [node name="PuntoIzquierdo" parent="Canion" index="0"]
 position = Vector2( 0, -36 )
 

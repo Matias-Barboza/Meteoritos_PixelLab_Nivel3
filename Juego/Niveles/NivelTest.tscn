@@ -43,18 +43,9 @@ numero_peligros = 2
 [node name="EstacionRecarga" parent="ContenedorEstaciones" instance=ExtResource( 11 )]
 position = Vector2( 1797, 264 )
 
-[node name="ContenedorBaseEnemiga" type="Node2D" parent="."]
+[node name="ContenedorBasesEnemigas" type="Node2D" parent="."]
 
-[node name="BaseEnemiga" parent="ContenedorBaseEnemiga" instance=ExtResource( 13 )]
-position = Vector2( -1533, -1814 )
-
-[node name="BaseEnemiga2" parent="ContenedorBaseEnemiga" instance=ExtResource( 13 )]
-position = Vector2( -145, -3278 )
-
-[node name="BaseEnemiga3" parent="ContenedorBaseEnemiga" instance=ExtResource( 13 )]
-position = Vector2( -65, -492 )
-
-[node name="BaseEnemiga4" parent="ContenedorBaseEnemiga" instance=ExtResource( 13 )]
+[node name="BaseEnemiga4" parent="ContenedorBasesEnemigas" instance=ExtResource( 13 )]
 position = Vector2( 1466, -1805 )
 
 [node name="CamaraNivel" type="Camera2D" parent="."]

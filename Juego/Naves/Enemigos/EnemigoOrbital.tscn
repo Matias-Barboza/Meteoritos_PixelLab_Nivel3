@@ -49,7 +49,8 @@ shape = SubResource( 1 )
 
 [node name="Canion" parent="." index="2"]
 proyectil = ExtResource( 4 )
-cadencia_disparo = 1.2
+cadencia_disparo = 3.0
+velocidad_proyectil = 1000
 
 [node name="PuntoIzquierdo" parent="Canion" index="0"]
 position = Vector2( 17, -18 )

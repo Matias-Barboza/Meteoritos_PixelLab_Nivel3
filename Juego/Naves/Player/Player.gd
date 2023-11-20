@@ -99,6 +99,14 @@ func _process(_delta: float) -> void:
 	player_input()
 
 
+func desactivar_controles() -> void:
+	
+	controlador_estados(ESTADO.SPAWNEANDO)
+	empuje = Vector2.ZERO
+	sfx_motor.sonido_off()
+	rayo_laser.set_is_casting(false)
+
+
 # Getters y Setters
 func get_laser() -> RayoLaser:
 	

@@ -8,12 +8,14 @@ export var meteorito : PackedScene = null
 export var enemigo_interceptor : PackedScene = null
 export var explosion_meteorito : PackedScene = null
 export var sector_meteoritos : PackedScene = null
+export var rele_masa : PackedScene = null
 export var tiempo_transicion_camara : float = 1
 
 
 #Atributos 
 var cantidad_meteoritos : int 
 var player : Player = null
+var numero_bases_enemigas = 0
 
 
 #Atributos onready
@@ -23,13 +25,13 @@ onready var contenedor_enemigos : Node
 onready var contenedor_sectores_meteoritos : Node
 onready var camara_nivel : Camera2D = $CamaraNivel
 onready var camara_player : Camera2D = $Player/CamaraPlayer
-#onready var player : Player = $Player
 onready var tween_camara : Tween = $TweenCamara
 
 
 #Métodos
 func _ready() -> void:
 	
+	numero_bases_enemigas = contabilizar_bases_enemigas()
 	player = DatosJuego.get_player_actual()
 	conectar_seniales()
 	crear_contenedores()
@@ -106,6 +108,11 @@ func transicion_camaras(desde : Vector2, hasta : Vector2 , camara_actual : Camer
 	tween_camara.start()
 
 
+func contabilizar_bases_enemigas() -> int:
+	
+	return $ContenedorBasesEnemigas.get_child_count()
+
+
 func restar_cantidad_meteoritos() -> void:
 	
 	cantidad_meteoritos -= 1
@@ -143,6 +150,13 @@ func crear_explosion(posicion : Vector2 , numero : int = 1, intervalo : float = 
 		yield(get_tree().create_timer(intervalo), "timeout")
 
 
+func crear_rele() -> void:
+	
+	var new_rele_masa : ReleMasa = rele_masa.instance()
+	new_rele_masa.global_position = player.global_position + crear_posicion_aleatoria(1000.0, 800.0)
+	add_child(new_rele_masa)
+
+
 func _on_disparo(proyectil : Proyectil) -> void:
 	
 	contenedor_proyectiles.add_child(proyectil)
@@ -154,6 +168,10 @@ func _on_base_destruida(_base: Node2D, posiciones : Array) -> void:
 		
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
+	
+	numero_bases_enemigas -= 1
+	if numero_bases_enemigas == 0:
+		crear_rele()
 
 
 func _on_nave_destruida(nave : Player,posicion : Vector2 , cantidad_explosiones : int) -> void:
