@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if esta_disparando and esta_enfriado:
+	if esta_disparando and esta_enfriado and puede_disparar:
 		disparar()
 
 
