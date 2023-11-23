@@ -10,6 +10,7 @@ export var explosion_meteorito : PackedScene = null
 export var sector_meteoritos : PackedScene = null
 export var rele_masa : PackedScene = null
 export var tiempo_transicion_camara : float = 1
+export var tiempo_limite : int = 10 
 
 
 #Atributos 
@@ -26,16 +27,20 @@ onready var contenedor_sectores_meteoritos : Node
 onready var camara_nivel : Camera2D = $CamaraNivel
 onready var camara_player : Camera2D = $Player/CamaraPlayer
 onready var tween_camara : Tween = $TweenCamara
+onready var actualizador_timer : Timer = $ActualizadorTimer
 
 
 #Métodos
 func _ready() -> void:
 	
+	Eventos.emit_signal("nivel_iniciado")
+	Eventos.emit_signal("actualizar_tiempo", tiempo_limite)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	numero_bases_enemigas = contabilizar_bases_enemigas()
 	player = DatosJuego.get_player_actual()
 	conectar_seniales()
 	crear_contenedores()
+	actualizador_timer.start()
 
 
 func conectar_seniales() -> void:
@@ -118,6 +123,8 @@ func restar_cantidad_meteoritos() -> void:
 	
 	cantidad_meteoritos -= 1
 	
+	Eventos.emit_signal("cambio_numero_meteoritos", cantidad_meteoritos)
+	
 	if cantidad_meteoritos == 0:
 		contenedor_sectores_meteoritos.get_child(0).queue_free()
 		camara_player.set_puede_hacer_zoom(true)
@@ -193,6 +200,8 @@ func _on_nave_destruida(nave : Player,posicion : Vector2 , cantidad_explosiones 
 			camara_nivel,
 			tiempo_transicion_camara
 		)
+		
+		$RestartTimer.start()
 	
 	crear_explosion(posicion, cantidad_explosiones, 0.6, Vector2(100.0, 50.0))
 
@@ -222,6 +231,7 @@ func _on_nave_en_sector_peligro(centro_camara : Vector2, tipo_peligro : String,
 	
 	if tipo_peligro == "Meteorito":
 		crear_sector_meteoritos(centro_camara, num_peligros)
+		Eventos.emit_signal("cambio_numero_meteoritos", num_peligros)
 	elif tipo_peligro == "Enemigo":
 		crear_sector_enemigos(num_peligros)
 
@@ -230,3 +240,31 @@ func _on_TweenCamara_tween_completed(object: Object, _key: NodePath) -> void:
 	
 	if object.name == "CamaraPlayer":
 		object.global_position = player.global_position
+
+
+func _on_RestartTimer_timeout() -> void:
+	
+	Eventos.emit_signal("nivel_terminado")
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().reload_current_scene()
+
+
+func destruir_nivel() -> void:
+	
+	crear_explosion(
+		player.global_position,
+		2,
+		1.0,
+		Vector2(300.0, 200.0)
+	)
+	
+	player.destruir()
+
+
+func _on_ActualizadorTimer_timeout() -> void:
+	
+	tiempo_limite -= 1
+	
+	Eventos.emit_signal("actualizar_tiempo",tiempo_limite)
+	if tiempo_limite == 0:
+		destruir_nivel()
