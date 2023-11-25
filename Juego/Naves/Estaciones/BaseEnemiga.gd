@@ -19,11 +19,13 @@ var ruta_seleccionada : Path2D
 # Atributos onready
 onready var sfx_impacto : AudioStreamPlayer2D = $ImpactoSFX
 onready var timer_spawn : Timer = $TimerSpawnerEnemigos
+onready var barra_salud : ProgressBar = $BarraSalud
 
 
 # Metodos
 func _ready() -> void:
 	
+	barra_salud.set_valores(hitpoints)
 	timer_spawn.wait_time = intervalo_spawn
 	$AnimationPlayer.play(elegir_animacion_aleatoria())
 	seleccionar_ruta()
@@ -57,6 +59,7 @@ func recibir_danio(danio : float) -> void:
 		esta_destruida = true
 		destruir()
 	
+	barra_salud.set_hitpoints_actual(hitpoints)
 	sfx_impacto.play()
 
 
@@ -113,6 +116,7 @@ func destruir() -> void:
 	]
 	
 	Eventos.emit_signal("base_destruida", self, posiciones_partes)
+	Eventos.emit_signal("minimapa_objeto_destruido", self)
 	queue_free() 
 
 

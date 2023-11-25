@@ -16,6 +16,11 @@ var estado_ia_actual : int = ESTADO_IA.IDLE
 var potencia_actual : float = 0.0
 
 
+func _ready() -> void:
+	
+	Eventos.emit_signal("minimapa_objeto_creado")
+
+
 # Metodos custom
 func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
 	._on_AnimationPlayer_animation_finished(anim_name)

@@ -14,6 +14,13 @@ var player_en_zona : bool = false
 
 onready var sfx_recarga : AudioStreamPlayer2D = $SFXRecarga
 onready var sfx_estacion_descargada : AudioStreamPlayer2D = $SFXEstacionSinCarga
+onready var barra_energia : ProgressBar = $BarraEnergia
+
+
+func _ready() -> void:
+	
+	barra_energia.max_value = energia
+	barra_energia.value = energia
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,6 +62,8 @@ func controlar_energia() -> void:
 	
 	if energia < 0.0:
 		sfx_estacion_descargada.play()
+	
+	barra_energia.value = energia
 
 
 func _on_AreaColision_body_entered(body: Node) -> void:
