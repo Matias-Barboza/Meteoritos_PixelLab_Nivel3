@@ -31,6 +31,7 @@ func _ready() -> void:
 	icono_player.position = zona_renderizado.rect_size * 0.5 
 	escala_grilla = zona_renderizado.rect_size / (get_viewport_rect().size * escala_zoom)
 	conectar_seniales()
+	ocultar()
 
 
 func _process(_delta: float) -> void:
@@ -145,7 +146,7 @@ func set_esta_visible(hacer_visible : bool) -> void:
 	tween_visibilidad.start()
 
 
-func set_esta_activo(valor : bool) -> void:
+func set_esta_activo(_valor : bool) -> void:
 
 	pass
 

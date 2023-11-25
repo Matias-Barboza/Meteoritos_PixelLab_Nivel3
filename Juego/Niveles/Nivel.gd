@@ -14,6 +14,7 @@ export var tiempo_limite : int = 10
 export var musica_nivel : AudioStream = null
 export var musica_combate : AudioStream = null
 export(String, FILE, "*.tscn") var prox_nivel = ""
+export(String, FILE, "*.tscn") var menu_principal = ""
 
 
 # Atributos 
@@ -36,6 +37,7 @@ onready var actualizador_timer : Timer = $ActualizadorTimer
 #Métodos
 func _ready() -> void:
 	
+	$MenuPausa.visible = false
 	Eventos.emit_signal("nivel_iniciado")
 	Eventos.emit_signal("actualizar_tiempo", tiempo_limite)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -58,6 +60,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
 	Eventos.connect("spawn_orbital", self, "_on_spawn_orbital")
 	Eventos.connect("nivel_completado", self, "_on_nivel_completado")
+	Eventos.connect("estado_pausa_nivel", self , "_on_pausa_nivel")
 
 
 func crear_contenedores() -> void:
@@ -283,3 +286,24 @@ func _on_ActualizadorTimer_timeout() -> void:
 	Eventos.emit_signal("actualizar_tiempo",tiempo_limite)
 	if tiempo_limite == 0:
 		destruir_nivel()
+
+
+func _on_ButtonReanudar_pressed() -> void:
+	
+	Eventos.emit_signal("estado_pausa_nivel", false)
+
+
+func _on_ButtonMenuPrincipal_pressed() -> void:
+	
+	get_tree().change_scene(menu_principal)
+	get_tree().paused = false
+
+
+func _on_pausa_nivel(pausar : bool) -> void:
+	
+	if pausar:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	$MenuPausa.visible = pausar
+	get_tree().paused = pausar

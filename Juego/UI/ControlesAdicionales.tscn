@@ -1,0 +1,289 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Juego/UI/nombreJuego.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Juego/Meteoritos/fuente_advertencia.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Juego/UI/MiniMapa/Iconos/estacion_recarga.png" type="Texture" id=3]
+[ext_resource path="res://Juego/UI/Controles.gd" type="Script" id=4]
+[ext_resource path="res://Juego/UI/flecha.png" type="Texture" id=5]
+[ext_resource path="res://Juego/Niveles/Fondos/StarFieldBackground.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="DynamicFont" id=4]
+size = 60
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.164706, 0.0509804, 0.180392, 1 )
+border_width_bottom = 6
+border_color = Color( 0.52549, 0.52549, 0.52549, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.164706, 0.0509804, 0.180392, 1 )
+border_width_left = 8
+border_width_top = 4
+border_width_right = 1
+border_color = Color( 0.52549, 0.52549, 0.52549, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.27451, 0.0784314, 0.298039, 1 )
+border_width_bottom = 6
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ControlesAdicionales" type="Node"]
+script = ExtResource( 4 )
+nivel_inicial = "res://Juego/Niveles/Nivel1.tscn"
+
+[node name="StarFieldBackground" parent="." instance=ExtResource( 6 )]
+color_fondo = Color( 0.129412, 0.109804, 0.14902, 1 )
+
+[node name="LabelControles" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -450.5
+margin_top = -516.0
+margin_right = 450.5
+margin_bottom = -391.0
+custom_fonts/font = SubResource( 1 )
+text = "Controles"
+
+[node name="LabelE" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -822.0
+margin_top = -347.0
+margin_right = -740.0
+margin_bottom = -266.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "E"
+align = 1
+valign = 1
+
+[node name="Flecha4" type="Sprite" parent="StarFieldBackground/LabelE"]
+position = Vector2( 117, 42 )
+rotation = -4.71238
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelE/Flecha4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -143.995
+margin_right = 814.0
+margin_bottom = -68.9954
+rect_rotation = 270.0
+custom_fonts/font = SubResource( 4 )
+text = "Recargar escudo"
+
+[node name="Flecha5" type="Sprite" parent="StarFieldBackground/LabelE"]
+position = Vector2( 633, 43 )
+rotation = -4.71238
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelE/Flecha5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -143.995
+margin_right = 814.0
+margin_bottom = -68.9954
+rect_rotation = 270.0
+custom_fonts/font = SubResource( 4 )
+text = "En zona de estación:"
+
+[node name="EstacionRecarga" type="Sprite" parent="StarFieldBackground/LabelE"]
+self_modulate = Color( 0.717647, 0, 0.623529, 1 )
+position = Vector2( 1225, 43 )
+rotation = -4.71238
+texture = ExtResource( 3 )
+
+[node name="LabelR" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -822.0
+margin_top = -216.0
+margin_right = -740.0
+margin_bottom = -135.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "R"
+align = 1
+valign = 1
+
+[node name="Flecha" type="Sprite" parent="StarFieldBackground/LabelR"]
+position = Vector2( 116, 41 )
+rotation = 1.57079
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelR/Flecha"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -97.9998
+margin_top = -146.0
+margin_right = 1032.0
+margin_bottom = -71.0002
+rect_rotation = -89.9999
+custom_fonts/font = SubResource( 4 )
+text = "Recargar Láser"
+
+[node name="Flecha5" type="Sprite" parent="StarFieldBackground/LabelR"]
+position = Vector2( 602, 43 )
+rotation = -4.71238
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelR/Flecha5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -143.995
+margin_right = 814.0
+margin_bottom = -68.9954
+rect_rotation = 270.0
+custom_fonts/font = SubResource( 4 )
+text = "En zona de estación:"
+
+[node name="EstacionRecarga" type="Sprite" parent="StarFieldBackground/LabelR"]
+self_modulate = Color( 0.717647, 0, 0.623529, 1 )
+position = Vector2( 1194, 43 )
+rotation = -4.71238
+texture = ExtResource( 3 )
+
+[node name="LabelMiniMapa" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -822.0
+margin_top = -86.0
+margin_right = -651.0
+margin_bottom = -5.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "Tab"
+align = 1
+valign = 1
+
+[node name="Flecha2" type="Sprite" parent="StarFieldBackground/LabelMiniMapa"]
+position = Vector2( 204, 39 )
+rotation = 1.57079
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelMiniMapa/Flecha2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -132.0
+margin_right = 994.0
+margin_bottom = -57.0002
+rect_rotation = -89.9999
+custom_fonts/font = SubResource( 4 )
+text = "Activar minimapa"
+
+[node name="LabelEscudo" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -822.0
+margin_top = 42.0
+margin_right = -427.0
+margin_bottom = 123.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "Space"
+align = 1
+valign = 1
+
+[node name="Flecha3" type="Sprite" parent="StarFieldBackground/LabelEscudo"]
+position = Vector2( 425, 40 )
+rotation = 1.57079
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="DescripcionMovimiento" type="Label" parent="StarFieldBackground/LabelEscudo/Flecha3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.0
+margin_top = -142.0
+margin_right = 1297.0
+margin_bottom = -67.0002
+rect_rotation = 270.0
+custom_fonts/font = SubResource( 4 )
+text = "Activar escudo"
+
+[node name="ButtonEmpezarJuego" type="Button" parent="StarFieldBackground"]
+margin_left = 647.0
+margin_top = 877.0
+margin_right = 1220.0
+margin_bottom = 985.0
+custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Empezar juego"
+
+[connection signal="pressed" from="StarFieldBackground/ButtonEmpezarJuego" to="." method="_on_ButtonEmpezarJuego_pressed"]

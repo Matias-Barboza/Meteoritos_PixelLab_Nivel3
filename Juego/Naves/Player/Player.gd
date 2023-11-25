@@ -55,6 +55,11 @@ func player_input() -> void:
 	#Empuje
 	empuje = Vector2.ZERO
 	
+	if Input.is_action_just_released("pausa"):
+		
+		Eventos.emit_signal("estado_pausa_nivel", true)
+	
+	
 	if Input.is_action_pressed("mover_adelante"):
 		
 		empuje = Vector2(potencia_motor, 0)

@@ -2,7 +2,7 @@ extends Node
 
 
 # Atributos export
-export(String, FILE, "*.tscn") var nivel_inicial
+export(String, FILE, "*.tscn") var escena_siguiente
 
 
 # Metodos
@@ -15,7 +15,7 @@ func _ready() -> void:
 func _on_ButtonJugar_pressed() -> void:
 	
 	MusicaJuego.play_boton()
-	get_tree().change_scene(nivel_inicial)
+	get_tree().change_scene(escena_siguiente)
 
 
 func _on_ButtonSalir_pressed() -> void:
