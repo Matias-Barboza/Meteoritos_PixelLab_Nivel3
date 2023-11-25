@@ -2,7 +2,7 @@ class_name Nivel
 extends Node2D
 
 
-#Atributos export
+# Atributos export
 export var explosion : PackedScene = null
 export var meteorito : PackedScene = null
 export var enemigo_interceptor : PackedScene = null
@@ -13,15 +13,16 @@ export var tiempo_transicion_camara : float = 1
 export var tiempo_limite : int = 10 
 export var musica_nivel : AudioStream = null
 export var musica_combate : AudioStream = null
+export(String, FILE, "*.tscn") var prox_nivel = ""
 
 
-#Atributos 
+# Atributos 
 var cantidad_meteoritos : int 
 var player : Player = null
 var numero_bases_enemigas = 0
 
 
-#Atributos onready
+# Atributos onready
 onready var contenedor_proyectiles : Node
 onready var contenedor_meteoritos : Node
 onready var contenedor_enemigos : Node
@@ -56,6 +57,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("nave_en_sector_peligro", self , "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
 	Eventos.connect("spawn_orbital", self, "_on_spawn_orbital")
+	Eventos.connect("nivel_completado", self, "_on_nivel_completado")
 
 
 func crear_contenedores() -> void:
@@ -240,6 +242,13 @@ func _on_nave_en_sector_peligro(centro_camara : Vector2, tipo_peligro : String,
 		Eventos.emit_signal("cambio_numero_meteoritos", num_peligros)
 	elif tipo_peligro == "Enemigo":
 		crear_sector_enemigos(num_peligros)
+
+
+func _on_nivel_completado() -> void:
+	
+	#Eventos.emit_signal("nivel_completado")
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().change_scene(prox_nivel)
 
 
 func _on_TweenCamara_tween_completed(object: Object, _key: NodePath) -> void:

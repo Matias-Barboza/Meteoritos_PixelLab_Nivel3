@@ -120,3 +120,4 @@ bus = "SFX"
 
 [node name="SFXLaserQuemando" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"

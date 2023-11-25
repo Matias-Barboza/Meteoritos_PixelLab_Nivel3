@@ -2,6 +2,7 @@ class_name ExplosionMeteorito
 extends Node2D
 
 
+# Metodos
 func _ready() -> void:
 	
 	$AnimationPlayer.play(elegir_animacion_aleatoria())

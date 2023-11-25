@@ -39,10 +39,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	#Activado estela
 	if event.is_action_pressed("mover_adelante"):
 		estela.set_max_points(estela_maxima)
-		sfx_motor.sonido_on()
 	elif event.is_action_pressed("mover_atras"):
 		estela.set_max_points(0)
-		sfx_motor.sonido_on()
 	
 	if event.is_action_released("mover_adelante") or event.is_action_released("mover_atras"):
 		sfx_motor.sonido_off()
@@ -58,28 +56,37 @@ func player_input() -> void:
 	empuje = Vector2.ZERO
 	
 	if Input.is_action_pressed("mover_adelante"):
+		
 		empuje = Vector2(potencia_motor, 0)
+		sfx_motor.sonido_on()
 	elif Input.is_action_pressed("mover_atras"):
+		
 		empuje = Vector2(-potencia_motor, 0)
+		sfx_motor.sonido_on()
 	
 	#Rotacion
 	dir_rotacion = 0
 	if Input.is_action_pressed("rotar_horario"):
+		
 		dir_rotacion += 1
 	elif Input.is_action_pressed("rotar_antihorario"):
+		
 		dir_rotacion -= 1
 	
 	#Disparo
 	if Input.is_action_pressed("disparo_principal"):
+		
 		canion.set_esta_disparando(true)
 	
 	if Input.is_action_just_released("disparo_principal"):
+		
 		canion.set_esta_disparando(false)
 
 
 func esta_input_activo() -> bool:
 	
 	if estado_actual in [ESTADO.SPAWNEANDO, ESTADO.MUERTO]:
+		
 		return false
 	
 	return true
@@ -94,6 +101,7 @@ func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 func _process(_delta: float) -> void:
 	
 	if not esta_input_activo():
+		
 		return
 	
 	player_input()
@@ -121,4 +129,5 @@ func get_escudo() -> Escudo:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	
 	if anim_name == "spawn":
+		
 		controlador_estados(ESTADO.VIVO)

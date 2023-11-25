@@ -8,6 +8,7 @@ export var zoom_minimo : float = 0.8
 export var zoom_maximo : float = 1.5
 
 
+# Metodos
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("zoom_in"):

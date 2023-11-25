@@ -1,7 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Juego/Meteoritos/fuente_advertencia.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Juego/Niveles/Fondos/StarFieldBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Juego/UI/MenuPrincipal.gd" type="Script" id=3]
+[ext_resource path="res://Juego/UI/nombreJuego.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Juego/Naves/Enemigos/naveInterceptor.png" type="Texture" id=5]
+[ext_resource path="res://Juego/Proyectiles/proyectil_jugador.png" type="Texture" id=6]
+[ext_resource path="res://Juego/Naves/Player/player_ship.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -9,24 +20,144 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.164706, 0.0509804, 0.180392, 1 )
+border_width_left = 8
+border_width_top = 4
+border_width_right = 1
+border_color = Color( 0.52549, 0.52549, 0.52549, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.27451, 0.0784314, 0.298039, 1 )
+border_width_bottom = 6
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.309804, 0.101961, 0.101961, 1 )
+border_width_left = 8
+border_width_top = 4
+border_width_right = 1
+border_color = Color( 0.52549, 0.52549, 0.52549, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.513726, 0.141176, 0.141176, 1 )
+border_width_bottom = 6
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="MenuPrincipal" type="Node"]
 script = ExtResource( 3 )
+nivel_inicial = "res://Juego/Niveles/Nivel1.tscn"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+[node name="StarFieldBackground" parent="." instance=ExtResource( 2 )]
+color_fondo = Color( 0.129412, 0.109804, 0.14902, 1 )
 
-[node name="Button" type="Button" parent="ColorRect"]
+[node name="ProyectilEnemigo3" type="Sprite" parent="StarFieldBackground"]
+modulate = Color( 2, 0, 0, 1 )
+position = Vector2( 1257.54, 271.294 )
+rotation = 1.0472
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="ProyectilEnemigo4" type="Sprite" parent="StarFieldBackground"]
+modulate = Color( 2, 0, 0, 1 )
+position = Vector2( 1294.54, 327.294 )
+rotation = 1.0472
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="NombreJuego" type="Label" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -476.5
+margin_top = -375.0
+margin_right = 476.5
+margin_bottom = -250.0
+custom_fonts/font = SubResource( 3 )
+text = "Meteoritos"
+
+[node name="ButtonJugar" type="Button" parent="StarFieldBackground"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -235.0
-margin_top = -79.0
+margin_top = -160.0
 margin_right = 235.0
-margin_bottom = 79.0
+margin_bottom = -2.0
 custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = SubResource( 4 )
 text = "Jugar"
 
-[connection signal="pressed" from="ColorRect/Button" to="." method="_on_Button_pressed"]
+[node name="ButtonSalir" type="Button" parent="StarFieldBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -199.0
+margin_top = 63.0
+margin_right = 199.0
+margin_bottom = 191.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 5 )
+text = "Salir"
+
+[node name="NavePlayer" type="Sprite" parent="StarFieldBackground"]
+position = Vector2( 434, 359 )
+rotation = 2.35619
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="NaveInterceptor" type="Sprite" parent="StarFieldBackground"]
+position = Vector2( 1641, 121 )
+rotation = 4.18878
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
+
+[node name="NaveInterceptor2" type="Sprite" parent="StarFieldBackground"]
+position = Vector2( 113.783, 885 )
+rotation = -5.75958
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
+
+[node name="ProyectilEnemigo" type="Sprite" parent="StarFieldBackground"]
+modulate = Color( 2, 0, 0, 1 )
+position = Vector2( 212.294, 657.543 )
+rotation = 0.523598
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="ProyectilEnemigo2" type="Sprite" parent="StarFieldBackground"]
+modulate = Color( 2, 0, 0, 1 )
+position = Vector2( 267, 687 )
+rotation = 0.523598
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[connection signal="pressed" from="StarFieldBackground/ButtonJugar" to="." method="_on_ButtonJugar_pressed"]
+[connection signal="pressed" from="StarFieldBackground/ButtonSalir" to="." method="_on_ButtonSalir_pressed"]

@@ -4,6 +4,8 @@ class_name RayoLaser
 # You can attach it to a weapon or a ship; the laser will rotate with its parent.
 extends RayCast2D
 
+
+# Atributos export
 # Speed at which the laser extends when first fired, in pixels per seconds.
 export var cast_speed := 7000.0
 # Maximum length of the laser in pixels.
@@ -11,6 +13,8 @@ export var max_length := 1400.0
 # Base duration of the tween animation in seconds.
 export var growth_time := 0.1
 
+
+# Atributos
 # If `true`, the laser is firing.
 # It plays appearing and disappearing animations when it's not animating.
 # See `appear()` and `disappear()` for more information.
@@ -21,6 +25,7 @@ var radio_desgaste : float = -1.0
 var energia_original : float
 
 
+# Atributos onready
 onready var fill := $FillLine2D
 onready var tween := $Tween
 onready var casting_particles := $CastingParticles2D
@@ -28,10 +33,10 @@ onready var collision_particles := $CollisionParticles2D
 onready var beam_particles := $BeamParticles2D
 onready var sfx_laser : AudioStreamPlayer2D = $SFXLaser
 onready var sfx_laser_quemando : AudioStreamPlayer2D = $SFXLaserQuemando
-
 onready var line_width: float = fill.width
 
 
+# Metodos
 func _ready() -> void:
 	
 	energia_original = energia
@@ -50,12 +55,14 @@ func set_is_casting(cast: bool) -> void:
 	is_casting = cast
 	
 	if is_casting:
+		
 		sfx_laser.play()
 		sfx_laser_quemando.play()
 		cast_to = Vector2.ZERO
 		fill.points[1] = cast_to
 		appear()
 	else:
+		
 		# Reset the laser endpoint
 		Eventos.emit_signal("ocultar_energia_laser")
 		sfx_laser.stop()
@@ -87,10 +94,12 @@ func cast_beam(delta : float) -> void:
 	collision_particles.emitting = is_colliding()
 
 	if is_colliding():
+		
 		cast_point = to_local(get_collision_point())
 		collision_particles.global_rotation = get_collision_normal().angle()
 		collision_particles.position = cast_point
 		if get_collider().has_method("recibir_danio"):
+			
 			get_collider().recibir_danio(radio_danio * delta)
 
 	fill.points[1] = cast_point
@@ -101,6 +110,7 @@ func cast_beam(delta : float) -> void:
 func appear() -> void:
 	
 	if tween.is_active():
+		
 		tween.stop_all()
 	tween.interpolate_property(fill, "width", 0, line_width, growth_time * 2)
 	tween.start()
@@ -109,6 +119,7 @@ func appear() -> void:
 func disappear() -> void:
 	
 	if tween.is_active():
+		
 		tween.stop_all()
 	tween.interpolate_property(fill, "width", fill.width, 0, growth_time)
 	tween.start()
@@ -119,6 +130,7 @@ func controlar_energia(consumo : float) -> void:
 	energia += consumo
 	
 	if energia > energia_original:
+		
 		energia = energia_original
 	
 	Eventos.emit_signal("cambio_energia_laser", energia_original, energia)

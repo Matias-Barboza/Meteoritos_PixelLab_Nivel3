@@ -1,7 +1,7 @@
 extends Area2D
 
 
-
+# Metodos
 func _on_body_entered(body: Node) -> void:
 	
 	body.set_gravity_scale(0.1)

@@ -2,6 +2,7 @@ class_name ReleMasa
 extends Node2D
 
 
+# Metodos
 func _ready() -> void:
 	
 	Eventos.emit_signal("minimapa_objeto_creado")
@@ -38,4 +39,4 @@ func _on_DetectorPlayer_body_entered(body: Node) -> void:
 
 func _on_Tween_tween_all_completed() -> void:
 	
-	print("Pasarias de nivel, crack")
+	Eventos.emit_signal("nivel_completado")

@@ -25,12 +25,12 @@ tracks/0/keys = {
 }
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.835294, 1, 0, 1 )
+bg_color = Color( 0.917647, 0.803922, 0.0627451, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 1, 0.980392, 0.698039, 1 )
 border_blend = true
 
 [node name="EnemigoOrbital" instance=ExtResource( 1 )]

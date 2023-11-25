@@ -1,15 +1,18 @@
 extends MarginContainer
 
 
+# Atributos export
 export var escala_zoom : float = 4.0
 export var tiempo_visibile : float = 5.0
 
 
+# Atributos
 var escala_grilla : Vector2
 var player : Player = null
 var esta_visible : bool = true setget set_esta_visible
 
 
+# Atributos onready
 onready var zona_renderizado : TextureRect = $CuadroMiniMapa/ContenedorIconos/ZonaRenderizadoMiniMapa
 onready var icono_player : Sprite = $CuadroMiniMapa/ContenedorIconos/ZonaRenderizadoMiniMapa/IconoPlayer
 onready var icono_base : Sprite = $CuadroMiniMapa/ContenedorIconos/ZonaRenderizadoMiniMapa/IconoBaseEnemiga
@@ -21,11 +24,13 @@ onready var tween_visibilidad : Tween = $TweenInvisibilidad
 onready var items_mini_mapa : Dictionary = {}
 
 
+# Metodos
 func _ready() -> void:
-	
+
 	set_process(false)
 	icono_player.position = zona_renderizado.rect_size * 0.5 
 	escala_grilla = zona_renderizado.rect_size / (get_viewport_rect().size * escala_zoom)
+	conectar_seniales()
 
 
 func _process(_delta: float) -> void:
@@ -141,12 +146,12 @@ func set_esta_visible(hacer_visible : bool) -> void:
 
 
 func set_esta_activo(valor : bool) -> void:
-	
+
 	pass
 
 
 func ocultar() -> void:
-	
+
 	set_esta_visible(false)
 
 

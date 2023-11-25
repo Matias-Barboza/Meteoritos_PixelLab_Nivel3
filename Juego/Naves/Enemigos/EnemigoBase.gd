@@ -15,11 +15,12 @@ func _ready() -> void:
 	player_objetivo = DatosJuego.get_player_actual()
 	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 
-# Metodos
+
 func _physics_process(_delta: float) -> void:
 	
 	frame_actual += 1
 	if frame_actual % 3 == 0:
+		
 		rotar_hacia_player()
 
 
@@ -41,6 +42,7 @@ func _on_body_entered(body : Node) -> void:
 func _on_nave_destruida(nave : NaveBase, _posicion, _explosiones) -> void:
 	
 	if nave is Player:
+		
 		player_objetivo = null
 	
 	if nave.is_in_group("minimapa"):

@@ -1,13 +1,16 @@
 extends Node
 
 
+# Atributos export
 export var tiempo_transicion : float = 4.0
 export(float, -50.0, -20.0, 5.0) var volumen_apagado = -40.0
 
 
+# Atributos
 var volumen_original_musica_off : float = 0.0
 
 
+# Atributos onready
 onready var musica_nivel : AudioStreamPlayer = $MusicaNivel
 onready var musica_combate : AudioStreamPlayer = $MusicaCombate
 onready var tween_musica_on : Tween = $TweenMusicaOn
@@ -17,6 +20,7 @@ onready var lista_musicas : Dictionary = {
 } setget ,get_lista_musicas
 
 
+# Metodos
 func set_streams(stream_musica : AudioStream, stream_combate : AudioStream) -> void:
 	
 	musica_nivel.stream = stream_musica

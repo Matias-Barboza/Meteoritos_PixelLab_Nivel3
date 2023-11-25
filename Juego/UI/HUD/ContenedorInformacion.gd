@@ -2,17 +2,21 @@ class_name ContenedorInformacion
 extends NinePatchRect
 
 
+# Atributos export
 export var auto_ocultar : bool = false setget set_auto_ocultar
 
 
+# Atributos
 var esta_activo : bool = true setget set_esta_activo
 
 
+# Atributos onready
 onready var texto_contenedor : Label = $Label
 onready var auto_ocultar_timer : Timer = $AutoOcultarTimer
 onready var animaciones : AnimationPlayer = $AnimationPlayer
 
 
+# Metodos
 func mostrar() -> void:
 	
 	if esta_activo:
@@ -23,6 +27,7 @@ func mostrar() -> void:
 func ocultar() -> void:
 	
 	if not esta_activo:
+		
 		animaciones.stop()
 	
 	animaciones.play("ocultar")
@@ -31,11 +36,13 @@ func ocultar() -> void:
 func mostrar_suavizado() -> void:
 	
 	if not esta_activo:
+		
 		return
 	
 	animaciones.play("mostrar_suavizado")
 	
 	if auto_ocultar:
+		
 		auto_ocultar_timer.start()
 
 

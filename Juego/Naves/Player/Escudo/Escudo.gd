@@ -2,18 +2,22 @@ class_name Escudo
 extends Area2D
 
 
+# Atributos export
 export var energia : float = 8.0
 export var radio_desgaste : float = -1.6
 
 
+# Atributos
 var esta_activado : bool = false setget ,get_esta_activado
 var energia_original : float
 
 
+# Atributos onready
 onready var colisionador : CollisionShape2D = $CollisionShape2D
 onready var animaciones : AnimationPlayer = $AnimationPlayer
 
 
+# Metodos
 func _ready() -> void:
 	
 	energia_original = energia

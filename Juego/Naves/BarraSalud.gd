@@ -1,13 +1,15 @@
 class_name BarraSalud
 extends ProgressBar
 
-
+# Atributos export
 export var siempre_visible : bool = false
 
 
+# Atributos onready
 onready var tween_visibilidad : Tween = $TweenVisbilidad
 
 
+# Metodos
 func _ready() -> void:
 	
 	modulate = Color(1, 1, 1, siempre_visible)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Juego/Autoloads/MusicaJuego.gd" type="Script" id=1]
-[ext_resource path="res://Juego/Niveles/Musicas/musica_nivel.wav" type="AudioStream" id=2]
+[ext_resource path="res://Juego/Niveles/Musicas/musicaMenuPrincipal.wav" type="AudioStream" id=2]
 [ext_resource path="res://Juego/UI/sfx_boton.ogg" type="AudioStream" id=3]
 
 [node name="MusicaJuego" type="Node"]
@@ -22,6 +22,7 @@ bus = "Musica"
 
 [node name="BotonMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Botones"
 
 [node name="TweenMusicaOn" type="Tween" parent="."]
 

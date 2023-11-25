@@ -2,7 +2,8 @@
 class_name NaveBase
 extends RigidBody2D
 
-#Enums
+
+# Enums
 enum ESTADO {
 	SPAWNEANDO,
 	VIVO,
@@ -11,16 +12,16 @@ enum ESTADO {
 }
 
 
-#Atributos como export
+# Atributos como export
 export var hitpoints : float = 20
 export var cantidad_explosiones : int
 
 
-#Atributos
+# Atributos
 var estado_actual  : int = ESTADO.SPAWNEANDO
 
 
-#Atributos onready
+# Atributos onready
 onready var colisionador : CollisionShape2D = $CollisionShape2D
 onready var sfx_hurt : AudioStreamPlayer = $SFXImpactoDanio
 onready var canion : Canion = $Canion
@@ -67,6 +68,7 @@ func recibir_danio(danio : float)  -> void:
 	sfx_hurt.play()
 	
 	if hitpoints < 0.0:
+		
 		destruir()
 	
 	barra_salud.controlar_barra(hitpoints, true)
@@ -74,6 +76,7 @@ func recibir_danio(danio : float)  -> void:
 func _on_body_entered(body: Node) -> void:
 	
 	if body is Meteorito:
+		
 		body.destruir()
 		destruir()
 
@@ -81,4 +84,5 @@ func _on_body_entered(body: Node) -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	
 	if anim_name == "spawn":
+		
 		controlador_estados(ESTADO.VIVO)

@@ -288,6 +288,7 @@ anims/default = SubResource( 3 )
 
 [node name="SFXAnimacion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_Escudo_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

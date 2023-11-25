@@ -2,10 +2,11 @@ class_name EnemigoDummy
 extends Node2D
 
 
-#Atributos
+# Atributos export
 export var hitpoints : float = 10
 
 
+# Metodos
 func _process(_delta: float) -> void:
 	
 	$Canion.set_esta_disparando(true)

@@ -7,14 +7,17 @@ export var rango_max_ataque : float = 1400.0
 export var velocidad : float = 400.0
 
 
+# Atributos
 var base_duenia : Node2D = null
 var ruta : Path2D
 var ruta_a_seguir : PathFollow2D
 
 
+# Atributos onready
 onready var detector_obstaculo : RayCast2D = $DetectorObstaculo
 
 
+# Metodos
 func _ready() -> void:
 	
 	Eventos.connect("base_destruida", self, "_on_base_destruida")

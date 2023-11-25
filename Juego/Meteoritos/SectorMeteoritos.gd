@@ -2,16 +2,16 @@ class_name SectorMeteoritos
 extends Node2D
 
 
-#Atributos export
+# Atributos export
 export var cantidad_meteoritos : int = 10
 export var intervalo_spawn : float = 1.2 
 
 
-#Atributos
+# Atributos
 var spawners : Array
 
 
-#Metodos
+# Metodos
 func crear(posicion_global : Vector2, cantidad_meteoritos_spawnear : int) -> void:
 	
 	global_position = posicion_global
@@ -26,7 +26,6 @@ func _ready() -> void:
 	conectar_seniales_detectores()
 
 
-#Metodos custom
 func almacenar_spawners() -> void:
 	
 	for spawner in $SpawnersMeteorito.get_children():
@@ -37,6 +36,7 @@ func almacenar_spawners() -> void:
 func conectar_seniales_detectores() -> void:
 	
 	for detector in $DetectorFueraZona.get_children():
+		
 		detector.connect("body_entered", self, "_on_body_entered")
 
 
@@ -50,6 +50,7 @@ func spawner_aleatorio() -> int:
 func _on_TimerSpawn_timeout() -> void:
 	
 	if cantidad_meteoritos == 0:
+		
 		$TimerSpawn.stop()
 		return
 	
@@ -65,4 +66,5 @@ func _on_body_entered(body : Node) -> void:
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	
 	if anim_name == "advertencia":
+		
 		$TimerSpawn.start()

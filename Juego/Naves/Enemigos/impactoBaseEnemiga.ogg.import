@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/impactoBaseEnemiga.ogg-4b5dd4a913c2dc0287deba4182e8f3f0.oggstr"
+
+[deps]
+
+source_file="res://Juego/Naves/Enemigos/impactoBaseEnemiga.ogg"
+dest_files=[ "res://.import/impactoBaseEnemiga.ogg-4b5dd4a913c2dc0287deba4182e8f3f0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,11 +1,12 @@
 class_name Proyectil
 extends Area2D
 
-#Atributos
+# Atributos
 var velocidad : Vector2 = Vector2.ZERO
 var danio : float
 
 
+# Metodos
 func crear(pos : Vector2, dir: float, vel : float, danio_proyectil : int) -> void:
 	
 	position = pos 

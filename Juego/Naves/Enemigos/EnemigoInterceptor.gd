@@ -7,21 +7,21 @@ extends EnemigoBase
 enum ESTADO_IA {IDLE, ATACANDOQ, ATACANDOP, PERSECUCION}
 
 
-# Export var
+# Atributos export
 export var potencia_maxima : float = 800.0
 
 
 # Atributos
-var estado_ia_actual : int = ESTADO_IA.IDLE
+var estado_ia_actual : int = ESTADO_IA.ATACANDOP
 var potencia_actual : float = 0.0
 
 
+# Metodos
 func _ready() -> void:
 	
 	Eventos.emit_signal("minimapa_objeto_creado")
 
 
-# Metodos custom
 func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
 	._on_AnimationPlayer_animation_finished(anim_name)
 
@@ -32,7 +32,6 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	
 	linear_velocity.x = clamp(linear_velocity.x, -potencia_maxima, potencia_maxima)
 	linear_velocity.y = clamp(linear_velocity.y, -potencia_maxima, potencia_maxima)
-
 
 
 func controlador_estados_ia(nuevo_estado : int) -> void:
